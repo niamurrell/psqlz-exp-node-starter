@@ -22,23 +22,26 @@ The original tutorial uses MySQL instead of Postgres...visit the site to see how
 * Clone repo and `cd` into directory
 * `nvm use`
 * `npm i`
-* Open `.env.default` and copy/paste into new file in root director `.env`. Fill in the environment variables. For the sake of this readme `PORT` is set to 4000.
+* Open `.env.default` and copy/paste into new file in root directory `.env`. Fill in the environment variables. For the sake of this Readme `PORT` is set to 4000.
 * Open Postgres command line using `psql` and then in the Postgres command line:
 	* Create a new user for this app's database: `CREATE ROLE username WITH LOGIN PASSWORD 'password' CREATEDB;`. **username** and **password** should match what you've added to the `.env` file.
 	* Create a database for this app: `CREATE DATABASE dbname;`. **dbname** should match what you've added to the `.env` file.
 
-> NOTE: The master branch is the final demo after all 4 tutorials. The ending point of each tutorial is in its own branch.
+> NOTE: The master branch of this repo is the final demo after all 4 tutorials. The ending point of each tutorial is in its own branch.
 
 ## Run The App
 
 * `npm run start`
-* Open Postman to play around with the queries and results. Open the **Body** tab and make sure `x-www-form-urlencoded` iss selected.
+* Open Postman to play around with the queries and results. Open the **Body** tab and make sure `x-www-form-urlencoded` is selected.
 * Some routes to try out:
-	* **POST** to `localhost:4000/api/customers`. You can add data for `firstname`, `lastname`, `age`, `street`, and `phone`. You will see the address data is linked to the customer by association. Repeat with more customer data if you want.
-	* **GET** to `localhost:4000/api/customers`. You will see the associated data for all customers (with address) you added in previous step.
-	* **GET** to `localhost:4000/api/companies/init`. You will seed some company data and see a 'Done!' success message.
-	* **GET** to `localhost:4000/api/companies/all`. You will the companies with their associated products listed.
-	* **GET** to `localhost:4000/api/projects/init`. You will seed some project and user data and see a 'OK' success message.
-	* **GET** to `localhost:4000/api/projects/all`. You will the projects with their associated workers listed.
+	* *One-to-one:*
+		* **POST** to `localhost:4000/api/customers`. You can add data for `firstname`, `lastname`, `age`, `street`, and `phone`. You will see the address data is linked to the customer by association. Repeat with more customer data if you want.
+		* **GET** to `localhost:4000/api/customers`. You will see the associated data for all customers (with address) you added in previous step.
+	* *One-to-many:*
+		* **GET** to `localhost:4000/api/companies/init`. You will seed some company data and see a 'Done!' success message.
+		* **GET** to `localhost:4000/api/companies/all`. You will the companies with their associated products listed.
+	* *Many-to-many:*
+		* **GET** to `localhost:4000/api/projects/init`. You will seed some project and user data and see a 'OK' success message.
+		* **GET** to `localhost:4000/api/projects/all`. You will the projects with their associated workers listed.
 
-	Play around with different ways to insert and query data to learn more about using Sequelize associations (sandbox branches). 
+	Play around with different ways to insert and query data to learn more about using Sequelize associations. 
