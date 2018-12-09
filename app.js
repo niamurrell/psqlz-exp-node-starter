@@ -18,7 +18,6 @@ if (nodeEnv === 'development') {
 const db = require('./db/config');
 
 // Connect + Add New Models
-// db.sync()
 db.sequelize.sync({ force: true })
 	.then(() => {
 		console.log('Database connected & synched.');
@@ -28,8 +27,9 @@ db.sequelize.sync({ force: true })
 	});
 
 // Load Routes
-require('./customer/routes.js')(app);
-require('./company/routes.js')(app);
+require('./endpoints/customer/routes.js')(app);
+require('./endpoints/company/routes.js')(app);
+require('./endpoints/project/routes.js')(app);
 
 const port = process.env.PORT;
 app.listen(port, () =>
