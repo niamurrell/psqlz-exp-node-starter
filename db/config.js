@@ -27,15 +27,21 @@ db.sequelize = sequelize;
 // Load Models
 db.customers = require('./Customer')(sequelize, Sequelize);
 db.address = require('./Address')(sequelize, Sequelize);
+db.company = require('./Company.js')(sequelize, Sequelize);
+db.product = require('./Product.js')(sequelize, Sequelize);
 
 // Create Associations
 
 // ONE TO ONE ASSOCIATION
-db.address.belongsTo(db.customers, { foreignKey: 'fk_customerid', targetKey: 'uuid' });
-db.customers.hasOne(db.address, { foreignKey: 'fk_customerid', targetKey: 'uuid' });
+db.address.belongsTo(db.customers);
+db.customers.hasOne(db.address);
 
 // Renames column in target (addresses) to 'fk-customerid'...otherwise the default is customerUuid (table name + column name in camelCase)
 // db.address.belongsTo(db.customers, { foreignKey: 'fk_customerid', targetKey: 'uuid' });
 // db.customers.hasOne(db.address, { foreignKey: 'fk_customerid', targetKey: 'uuid' });
+
+// ONE TO MANY ASSOCIATION
+db.company.hasMany(db.product, { foreignKey: 'fk_companyid', sourceKey: 'uuid' });
+db.product.belongsTo(db.company, { foreignKey: 'fk_companyid', targetKey: 'uuid' });
 
 module.exports = db;

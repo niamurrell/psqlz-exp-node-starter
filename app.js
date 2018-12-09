@@ -29,6 +29,7 @@ db.sequelize.sync({ force: true })
 
 // Load Routes
 require('./customer/routes.js')(app);
+require('./company/routes.js')(app);
 
 const port = process.env.PORT;
 app.listen(port, () =>
