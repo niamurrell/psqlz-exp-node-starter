@@ -1,7 +1,11 @@
 {
   "name": "psqlz-exp-node-starter",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/niamurrell/psqlz-exp-node-starter.git"
+  },
   "version": "1.0.0",
-  "description": "Scaffold for a Node/Express app using Sequelize to manage Postgres database",
+  "description": "Scaffold for a Node/Express app using Sequelize to manage Postgres database for the purpose of learning associations",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
