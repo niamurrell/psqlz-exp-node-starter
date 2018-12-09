@@ -29,6 +29,8 @@ db.customers = require('./Customer')(sequelize, Sequelize);
 db.address = require('./Address')(sequelize, Sequelize);
 db.company = require('./Company.js')(sequelize, Sequelize);
 db.product = require('./Product.js')(sequelize, Sequelize);
+db.project = require('./Project.js')(sequelize, Sequelize);
+db.user = require('./User.js')(sequelize, Sequelize);
 
 // Create Associations
 
@@ -43,5 +45,10 @@ db.customers.hasOne(db.address);
 // ONE TO MANY ASSOCIATION
 db.company.hasMany(db.product, { foreignKey: 'fk_companyid', sourceKey: 'uuid' });
 db.product.belongsTo(db.company, { foreignKey: 'fk_companyid', targetKey: 'uuid' });
+
+// MANY TO MANY ASSOCIATION
+// NOTE 'through' is required to create join table between 'users' and 'projects'
+db.project.belongsToMany(db.user, { as: 'Workers', through: 'worker_tasks', foreignKey: 'projectId', otherKey: 'userId' });
+db.user.belongsToMany(db.project, { as: 'Tasks', through: 'worker_tasks', foreignKey: 'userId', otherKey: 'projectId' });
 
 module.exports = db;
