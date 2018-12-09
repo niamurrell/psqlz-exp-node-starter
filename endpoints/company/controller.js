@@ -59,6 +59,25 @@ exports.init = (req, res) => {
 		})
 };
 
+// Add a new product to an existing company
+exports.addProduct = (req, res) => {
+	Company.findAll({
+		where: {
+			name: req.body.name
+		}
+	}).then(foundCompany => {
+		const id = foundCompany[0].dataValues.uuid;
+		return Product.create({
+			code: "A-456",
+			name: "IphoneX",
+			details: "Price: 999.00 USD & FREE shipping",
+			fk_companyid: id
+		})
+	}).then(() => {
+		res.send("Product added!");
+	});
+};
+
 // Fetch all Companies include Products
 exports.findAll = (req, res) => {
 	Company.findAll({
